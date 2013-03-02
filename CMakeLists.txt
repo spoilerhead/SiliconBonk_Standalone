@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.6)
 project(SiliconBonk)
 set (BONK_VERSION_MAJOR 0)
 set (BONK_VERSION_MINOR 0)
-set (BONK_VERSION_PATCH 7)
+set (BONK_VERSION_PATCH 9)
 
 add_executable(bonk siliconbonk.cpp include/blend_modes.h include/colorspace.h include/fastmath.h)
 
@@ -94,22 +94,20 @@ add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 
 
 #create source packages:
-set(CPACK_DEBIAN_BUILD_DEPENDS g++ debhelper cmake libboost-dev libmagick++-dev libboost-program-options-dev)
+set(CPACK_DEBIAN_BUILD_DEPENDS g++ lsb-release debhelper cmake libboost-dev libmagick++-dev libboost-program-options-dev)
 set(CPACK_DEBIAN_PACKAGE_SOURCE_COPY git clone) #
 set(CPACK_DEBIAN_DISTRIBUTION_NAME ubuntu)
-set(CPACK_DEBIAN_DISTRIBUTION_RELEASES natty oneiric precise quantal)
 #set(CPACK_DEBIAN_PACKAGE_REMOVE_SOURCE_FILES testdata)
 
 execute_process(COMMAND lsb_release -is
     OUTPUT_VARIABLE _lsb_distribution OUTPUT_STRIP_TRAILING_WHITESPACE
     RESULT_VARIABLE _lsb_release_failed)
-  set(CPACK_DEBIAN_DISTRIBUTION_NAME ${_lsb_distribution} CACHE STRING "Name of the distrubiton")
-  string(TOLOWER ${CPACK_DEBIAN_DISTRIBUTION_NAME} CPACK_DEBIAN_DISTRIBUTION_NAME)
-  if( ${CPACK_DEBIAN_DISTRIBUTION_NAME} STREQUAL "ubuntu" )
-#    set(CPACK_DEBIAN_DISTRIBUTION_RELEASES oneiric precise quantal CACHE STRING "Release code-names of the distrubiton release")
-    set(CPACK_DEBIAN_DISTRIBUTION_RELEASES quantal CACHE STRING "Release code-names of the distrubiton release")
-  endif()
-  set(DPUT_HOST "ppa:spoilerhead/ppa-bonk" CACHE STRING "PPA repository to upload the debian sources")
+set(CPACK_DEBIAN_DISTRIBUTION_NAME ${_lsb_distribution} CACHE STRING "Name of the distribution")
+string(TOLOWER ${CPACK_DEBIAN_DISTRIBUTION_NAME} CPACK_DEBIAN_DISTRIBUTION_NAME)
+if( ${CPACK_DEBIAN_DISTRIBUTION_NAME} STREQUAL "ubuntu" )
+    set(CPACK_DEBIAN_DISTRIBUTION_RELEASES precise quantal CACHE STRING "Release code-names of the distribution release")
+endif()
+set(DPUT_HOST "ppa:spoilerhead/ppa-bonk" CACHE STRING "PPA repository to upload the debian sources")
   
   
 INCLUDE(CPack)
