@@ -1,0 +1,7 @@
+bonk
+*.so
+*.deb
+*.zip
+build/
+testdata/
+*~
