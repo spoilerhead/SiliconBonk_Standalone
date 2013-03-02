@@ -2,10 +2,11 @@ cmake_minimum_required(VERSION 2.6)
 
 project(SiliconBonk)
 set (BONK_VERSION_MAJOR 0)
-set (BONK_VERSION_MINOR 0)
-set (BONK_VERSION_PATCH 10)
+set (BONK_VERSION_MINOR 1)
+set (BONK_VERSION_PATCH 0)
 
 add_executable(bonk siliconbonk.cpp include/blend_modes.h include/colorspace.h include/fastmath.h)
+add_executable(fattoni fattoni.cpp include/blend_modes.h include/colorspace.h include/fastmath.h)
 
 # this is a C++ project
 enable_language(CXX)
@@ -57,9 +58,10 @@ find_package(Boost 1.46.0 COMPONENTS program_options REQUIRED)
 find_package(ImageMagick COMPONENTS Magick++ REQUIRED)
 include_directories(nclude ${PROJECT_SOURCE_DIR}/include ${ImageMagick_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 target_link_libraries(bonk ${ImageMagick_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(fattoni ${ImageMagick_LIBRARIES} ${Boost_LIBRARIES})
 
 ##
-INSTALL(TARGETS bonk DESTINATION bin)
+INSTALL(TARGETS bonk fattoni DESTINATION bin)
 
 ##------------------------------------------
 SET(CPACK_PACKAGE_NAME "SiliconBonk")
@@ -69,7 +71,7 @@ SET(CPACK_PACKAGE_VERSION_MAJOR "${BONK_VERSION_MAJOR}")
 SET(CPACK_PACKAGE_VERSION_MINOR "${BONK_VERSION_MINOR}")
 SET(CPACK_PACKAGE_VERSION_PATCH "${BONK_VERSION_PATCH}")
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "fast black and white for the masses. Command line version")
-SET(CPACK_PACKAGE_EXECUTABLES "bonk")
+SET(CPACK_PACKAGE_EXECUTABLES "bonk fattoni")
 SET(CPACK_PACKAGE_INSTALL_DIRECTORY "Silicon Bonk Standalone")
 SET(CPACK_PACKAGE_INSTALL_REGISTRY_KEY "Silicon Bonk Standalone")
 
