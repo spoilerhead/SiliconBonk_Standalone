@@ -94,25 +94,23 @@ int main (int argc, char **argv) {
         ("help,h", "produce help message")
         ("input,i", po::value<string>(), "input file")
         ("output,o", po::value<string>(), "output file, if none input file will be overwritten")
-        
-        ("light-hue,H", po::value<int>(), "highlight hue [0..360]")
-        ("light-saturation,S", po::value<int>(), "highlight  saturation [0..100]")
+
+        ("light-hue", po::value<int>(), "highlight hue [0..360]")
+        ("light-sat", po::value<int>(), "highlight  saturation [0..100]")
         ("shadow-hue", po::value<int>(), "shadow hue [0..360]")
-        ("shadow-saturation,s", po::value<int>(), "shadow  saturation [0..100]")
-        
+        ("shadow-sat", po::value<int>(), "shadow  saturation [0..100]")
+
         ("mix,m", po::value<int>(), "separation (mix) [0..100]")
         ("mids,M", po::value<int>(), "Mids [-100..100]")
         ("contrast,C", po::value<int>(), "Contrast [0..100]")
-        
+
         ("base-hue", po::value<int>(), "base hue [0..360]")
-        ("base-saturation", po::value<int>(), "base  saturation [0..100]")
+        ("base-sat", po::value<int>(), "base  saturation [0..100]")
         ("base-luma", po::value<int>(), "base luminance [0..100]")
 
-        
         ("normalize,n", "Normalize Image (Increase contrast by normalizing the pixel values to span the full range of color values)") //by magick++
         ("denoise,D", po::value<int>(), "reduce noise [0..500] (very very slow)")//by magick++
         ("verbose,v", "verbose")
-        
     ;
     
     po::positional_options_description p;
