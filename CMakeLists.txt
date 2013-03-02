@@ -1,15 +1,16 @@
 cmake_minimum_required(VERSION 2.6)
+
 project(SiliconBonk)
 set (BONK_VERSION_MAJOR 0)
 set (BONK_VERSION_MINOR 0)
-set (BONK_VERSION_PATCH 5)
+set (BONK_VERSION_PATCH 6)
 
 add_executable(bonk siliconbonk.cpp include/blend_modes.h include/colorspace.h include/fastmath.h)
 
 # this is a C++ project
 enable_language(CXX)
 
-
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake-modules")
 
 # configure a header file to pass some of the CMake settings
 # to the source code
@@ -59,9 +60,11 @@ target_link_libraries(bonk ${ImageMagick_LIBRARIES} ${Boost_LIBRARIES})
 
 ##
 INSTALL(TARGETS bonk DESTINATION bin)
+
+##------------------------------------------
 SET(CPACK_PACKAGE_NAME "SiliconBonk")
 SET(CPACK_PACKAGE_VENDOR "Spoilerhead")
-#SET(CPACK_PACKAGE_VERSION "0.0.4")
+
 SET(CPACK_PACKAGE_VERSION_MAJOR "${BONK_VERSION_MAJOR}")
 SET(CPACK_PACKAGE_VERSION_MINOR "${BONK_VERSION_MINOR}")
 SET(CPACK_PACKAGE_VERSION_PATCH "${BONK_VERSION_PATCH}")
@@ -79,7 +82,36 @@ SET(CPACK_GENERATOR DEB)
 
 #Debian packaging stuff
 SET(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), libgcc1 (>= 1:3.4.2-12),libstdc++6, libboost-program-options1.49.0|libboost-program-options1.46.1, libmagick++4 | libmagick++5")
-SET(CPACK_DEBIAN_PACKAGE_VERSIONS "x64")
+SET(CPACK_DEBIAN_PACKAGE_VERSION ${CPACK_PACKAGE_VERSION}+sph1)
 SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Dieter Steiner <spoilerhead@gmail.com>")
+SET(CPACK_PACKAGE_CONTACT "Dieter Steiner <spoilerhead@gmail.com>")
 
+set(CPACK_SOURCE_GENERATOR "TGZ")
+set(CPACK_SOURCE_IGNORE_FILES
+  "/build/;/testdata/;/.git/;~$;.deb;.zip;${CPACK_SOURCE_IGNORE_FILES}")
+
+add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
+
+
+#create source packages:
+set(CPACK_DEBIAN_BUILD_DEPENDS debhelper cmake libboost-dev libmagick++-dev)
+set(CPACK_DEBIAN_PACKAGE_SOURCE_COPY git clone) #
+set(CPACK_DEBIAN_DISTRIBUTION_NAME ubuntu)
+set(CPACK_DEBIAN_DISTRIBUTION_RELEASES natty oneiric precise quantal)
+#set(CPACK_DEBIAN_PACKAGE_REMOVE_SOURCE_FILES testdata)
+
+execute_process(COMMAND lsb_release -is
+    OUTPUT_VARIABLE _lsb_distribution OUTPUT_STRIP_TRAILING_WHITESPACE
+    RESULT_VARIABLE _lsb_release_failed)
+  set(CPACK_DEBIAN_DISTRIBUTION_NAME ${_lsb_distribution} CACHE STRING "Name of the distrubiton")
+  string(TOLOWER ${CPACK_DEBIAN_DISTRIBUTION_NAME} CPACK_DEBIAN_DISTRIBUTION_NAME)
+  if( ${CPACK_DEBIAN_DISTRIBUTION_NAME} STREQUAL "ubuntu" )
+#    set(CPACK_DEBIAN_DISTRIBUTION_RELEASES oneiric precise quantal CACHE STRING "Release code-names of the distrubiton release")
+    set(CPACK_DEBIAN_DISTRIBUTION_RELEASES quantal CACHE STRING "Release code-names of the distrubiton release")
+  endif()
+  set(DPUT_HOST "ppa:spoilerhead/ppa-bonk" CACHE STRING "PPA repository to upload the debian sources")
+  
+  
 INCLUDE(CPack)
+#needs https://openrave.svn.sourceforge.net/svnroot/openrave/trunk/modules-cmake/DebSourcePPA.cmake
+INCLUDE(DebSourcePPA) 
