@@ -1,0 +1,5 @@
+// the configured options and settings for Tutorial
+#define BONK_VERSION_MAJOR @BONK_VERSION_MAJOR@
+#define BONK_VERSION_MINOR @BONK_VERSION_MINOR@
+#define BONK_VERSION_PATCH @BONK_VERSION_PATCH@
+

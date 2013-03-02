@@ -1,10 +1,26 @@
 cmake_minimum_required(VERSION 2.6)
-project(SiliconBonk
-)
+project(SiliconBonk)
+set (BONK_VERSION_MAJOR 0)
+set (BONK_VERSION_MINOR 0)
+set (BONK_VERSION_PATCH 5)
+
 add_executable(bonk siliconbonk.cpp include/blend_modes.h include/colorspace.h include/fastmath.h)
 
 # this is a C++ project
 enable_language(CXX)
+
+
+
+# configure a header file to pass some of the CMake settings
+# to the source code
+configure_file (
+  "${PROJECT_SOURCE_DIR}/SiliconBonkConfig.h.in"
+  "${PROJECT_BINARY_DIR}/SiliconBonkConfig.h"
+  )
+ 
+# add the binary tree to the search path for include files
+# so that we will find SiliconBonkConfig.h
+include_directories("${PROJECT_BINARY_DIR}")
 
 
 include(FindOpenMP)
@@ -45,10 +61,10 @@ target_link_libraries(bonk ${ImageMagick_LIBRARIES} ${Boost_LIBRARIES})
 INSTALL(TARGETS bonk DESTINATION bin)
 SET(CPACK_PACKAGE_NAME "SiliconBonk")
 SET(CPACK_PACKAGE_VENDOR "Spoilerhead")
-SET(CPACK_PACKAGE_VERSION "0.0.4")
-SET(CPACK_PACKAGE_VERSION_MAJOR "0")
-SET(CPACK_PACKAGE_VERSION_MINOR "0")
-SET(CPACK_PACKAGE_VERSION_PATCH "4")
+#SET(CPACK_PACKAGE_VERSION "0.0.4")
+SET(CPACK_PACKAGE_VERSION_MAJOR "${BONK_VERSION_MAJOR}")
+SET(CPACK_PACKAGE_VERSION_MINOR "${BONK_VERSION_MINOR}")
+SET(CPACK_PACKAGE_VERSION_PATCH "${BONK_VERSION_PATCH}")
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "fast black and white for the masses. Command line version")
 SET(CPACK_PACKAGE_EXECUTABLES "bonk")
 SET(CPACK_PACKAGE_INSTALL_DIRECTORY "Silicon Bonk Standalone")
