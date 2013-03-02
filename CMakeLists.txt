@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.6)
 project(SiliconBonk)
 set (BONK_VERSION_MAJOR 0)
 set (BONK_VERSION_MINOR 0)
-set (BONK_VERSION_PATCH 6)
+set (BONK_VERSION_PATCH 7)
 
 add_executable(bonk siliconbonk.cpp include/blend_modes.h include/colorspace.h include/fastmath.h)
 
@@ -94,7 +94,7 @@ add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 
 
 #create source packages:
-set(CPACK_DEBIAN_BUILD_DEPENDS debhelper cmake libboost-dev libmagick++-dev)
+set(CPACK_DEBIAN_BUILD_DEPENDS g++ debhelper cmake libboost-dev libmagick++-dev libboost-program-options-dev)
 set(CPACK_DEBIAN_PACKAGE_SOURCE_COPY git clone) #
 set(CPACK_DEBIAN_DISTRIBUTION_NAME ubuntu)
 set(CPACK_DEBIAN_DISTRIBUTION_RELEASES natty oneiric precise quantal)
