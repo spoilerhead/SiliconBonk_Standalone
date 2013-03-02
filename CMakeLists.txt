@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.6)
 project(SiliconBonk)
 set (BONK_VERSION_MAJOR 0)
 set (BONK_VERSION_MINOR 0)
-set (BONK_VERSION_PATCH 9)
+set (BONK_VERSION_PATCH 10)
 
 add_executable(bonk siliconbonk.cpp include/blend_modes.h include/colorspace.h include/fastmath.h)
 
@@ -105,7 +105,7 @@ execute_process(COMMAND lsb_release -is
 set(CPACK_DEBIAN_DISTRIBUTION_NAME ${_lsb_distribution} CACHE STRING "Name of the distribution")
 string(TOLOWER ${CPACK_DEBIAN_DISTRIBUTION_NAME} CPACK_DEBIAN_DISTRIBUTION_NAME)
 if( ${CPACK_DEBIAN_DISTRIBUTION_NAME} STREQUAL "ubuntu" )
-    set(CPACK_DEBIAN_DISTRIBUTION_RELEASES oneiric precise quantal CACHE STRING "Release code-names of the distribution release")
+    set(CPACK_DEBIAN_DISTRIBUTION_RELEASES oneiric precise quantal raring CACHE STRING "Release code-names of the distribution release")
 endif()
 set(DPUT_HOST "ppa:spoilerhead/ppa-bonk" CACHE STRING "PPA repository to upload the debian sources")
   
