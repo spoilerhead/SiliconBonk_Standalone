@@ -105,7 +105,7 @@ execute_process(COMMAND lsb_release -is
 set(CPACK_DEBIAN_DISTRIBUTION_NAME ${_lsb_distribution} CACHE STRING "Name of the distribution")
 string(TOLOWER ${CPACK_DEBIAN_DISTRIBUTION_NAME} CPACK_DEBIAN_DISTRIBUTION_NAME)
 if( ${CPACK_DEBIAN_DISTRIBUTION_NAME} STREQUAL "ubuntu" )
-    set(CPACK_DEBIAN_DISTRIBUTION_RELEASES precise quantal CACHE STRING "Release code-names of the distribution release")
+    set(CPACK_DEBIAN_DISTRIBUTION_RELEASES oneiric precise quantal CACHE STRING "Release code-names of the distribution release")
 endif()
 set(DPUT_HOST "ppa:spoilerhead/ppa-bonk" CACHE STRING "PPA repository to upload the debian sources")
   
