@@ -3,10 +3,10 @@ cmake_minimum_required(VERSION 2.6)
 project(SiliconBonk)
 set (BONK_VERSION_MAJOR 0)
 set (BONK_VERSION_MINOR 1)
-set (BONK_VERSION_PATCH 0)
+set (BONK_VERSION_PATCH 1)
 
-add_executable(bonk siliconbonk.cpp include/blend_modes.h include/colorspace.h include/fastmath.h)
-add_executable(fattoni fattoni.cpp include/blend_modes.h include/colorspace.h include/fastmath.h)
+add_executable(bonk siliconbonk.cpp include/blend_modes.h include/colorspace.h include/fastmath.h include/siliconbonk.h)
+add_executable(fattoni fattoni.cpp include/blend_modes.h include/colorspace.h include/fastmath.h include/siliconbonk.h)
 
 # this is a C++ project
 enable_language(CXX)
