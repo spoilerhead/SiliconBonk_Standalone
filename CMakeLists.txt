@@ -80,20 +80,20 @@ SET(CPACK_PACKAGE_INSTALL_REGISTRY_KEY "Silicon Bonk Standalone")
 
 SET(CPACK_CMAKE_GENERATOR "Unix Makefiles")
 #SET(CPACK_GENERATOR TGZ;DEB;RPM)
-SET(CPACK_GENERATOR DEB)
+SET(CPACK_GENERATOR DEB;RPM)
 
 #SET(CPACK_SYSTEM_NAME "Linux-i686")
 #SET(CPACK_TOPLEVEL_TAG "Linux-i686")
 
 #Debian packaging stuff
-SET(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), libgcc1 (>= 1:3.4.2-12),libstdc++6, libboost-program-options1.49.0|libboost-program-options1.46.1, libmagick++4 | libmagick++5")
+SET(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), libgcc1 (>= 1:3.4.2-12),libstdc++6, libboost-program-options1.49.0|libboost-program-options1.46.1, libmagick++4 | libmagick++5, liblcms2-2")
 SET(CPACK_DEBIAN_PACKAGE_VERSION ${CPACK_PACKAGE_VERSION}+sph1)
 SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Dieter Steiner <spoilerhead@gmail.com>")
 SET(CPACK_PACKAGE_CONTACT "Dieter Steiner <spoilerhead@gmail.com>")
 
 set(CPACK_SOURCE_GENERATOR "TGZ")
 set(CPACK_SOURCE_IGNORE_FILES
-  "/build/;/testdata/;/.git/;~$;.deb;.zip;${CPACK_SOURCE_IGNORE_FILES}")
+  "/build/;/testdata/;/.git/;~$;.deb;.rpm;.zip;${CPACK_SOURCE_IGNORE_FILES}")
 
 add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 
