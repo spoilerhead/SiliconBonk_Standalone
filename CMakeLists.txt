@@ -5,8 +5,8 @@ set (BONK_VERSION_MAJOR 0)
 set (BONK_VERSION_MINOR 2)
 set (BONK_VERSION_PATCH 0)
 
-add_executable(bonk siliconbonk.cpp include/blend_modes.h include/colorspace.h include/fastmath.h include/siliconbonk.h)
-add_executable(fattoni fattoni.cpp include/blend_modes.h include/colorspace.h include/fastmath.h include/siliconbonk.h)
+add_executable(bonk siliconbonk.cpp colormanagement.cpp include/colormanagement.h include/blend_modes.h include/colorspace.h include/fastmath.h include/siliconbonk.h)
+add_executable(fattoni fattoni.cpp colormanagement.cpp include/colormanagement.h include/blend_modes.h include/colorspace.h include/fastmath.h include/siliconbonk.h)
 
 # this is a C++ project
 enable_language(CXX)

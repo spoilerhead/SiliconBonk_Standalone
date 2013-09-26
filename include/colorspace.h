@@ -53,6 +53,10 @@ typedef struct  {
 } rgb_colorInt32;
 
 typedef struct  {
+    uint16_t r, g, b;    /* Channel intensities between 0.0 and 1.0 */
+} rgb_colorUInt16;
+
+typedef struct  {
     float hue;        /* Hue degree between 0.0 and 360.0 */
     float sat;        /* Saturation between 0.0 (gray) and 1.0 */
     float val;        /* Value between 0.0 (black) and 1.0 */
