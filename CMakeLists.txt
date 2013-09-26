@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 2.6)
 
 project(SiliconBonk)
 set (BONK_VERSION_MAJOR 0)
-set (BONK_VERSION_MINOR 1)
-set (BONK_VERSION_PATCH 1)
+set (BONK_VERSION_MINOR 2)
+set (BONK_VERSION_PATCH 0)
 
 add_executable(bonk siliconbonk.cpp include/blend_modes.h include/colorspace.h include/fastmath.h include/siliconbonk.h)
 add_executable(fattoni fattoni.cpp include/blend_modes.h include/colorspace.h include/fastmath.h include/siliconbonk.h)
@@ -54,11 +54,14 @@ endif()
 
 
 find_package(Boost 1.46.0 COMPONENTS program_options REQUIRED)
-
 find_package(ImageMagick COMPONENTS Magick++ REQUIRED)
-include_directories(nclude ${PROJECT_SOURCE_DIR}/include ${ImageMagick_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
-target_link_libraries(bonk ${ImageMagick_LIBRARIES} ${Boost_LIBRARIES})
-target_link_libraries(fattoni ${ImageMagick_LIBRARIES} ${Boost_LIBRARIES})
+
+##INCLUDE(FindLCMS2) 
+find_package(LCMS2 REQUIRED)
+
+include_directories(include ${PROJECT_SOURCE_DIR}/include ${ImageMagick_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${LCMS2_INCLUDE_DIRS})
+target_link_libraries(bonk ${ImageMagick_LIBRARIES} ${Boost_LIBRARIES} ${LCMS2_LIBRARIES})
+target_link_libraries(fattoni ${ImageMagick_LIBRARIES} ${Boost_LIBRARIES} ${LCMS2_LIBRARIES})
 
 ##
 INSTALL(TARGETS bonk fattoni DESTINATION bin)
