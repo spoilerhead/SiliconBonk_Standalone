@@ -218,9 +218,6 @@ int main (int argc, char **argv) {
         for(size_t i = 0; i < width*height ; i++) {
             const rgb_colorUInt16 rgbI = {pixels[i].red, pixels[i].green, pixels[i].blue};
             rgb_color rgb;
-            /*rgb.r = ITOF(rgbI.r);
-            rgb.g = ITOF(rgbI.g);
-            rgb.b = ITOF(rgbI.b);*/
             rgb = WS.toWorkingSpace(rgbI);
             
             ///- core, directly from bibble-------------------------------------------------------------
@@ -275,15 +272,12 @@ int main (int argc, char **argv) {
             rgb.r = clipf(rgb.r,0.f,1.f);
             rgb.g = clipf(rgb.g,0.f,1.f);
             rgb.b = clipf(rgb.b,0.f,1.f);
-            rgb = WS.fromWorkingSpace(rgb);
+            rgb_colorUInt16 rgbR = WS.fromWorkingSpace(rgb);
             ///---------------------------------------------------------
-            pixels[i].red = FTOI(rgb.r);
-            pixels[i].green = FTOI(rgb.g);
-            pixels[i].blue = FTOI(rgb.b);
+            pixels[i].red = rgbR.r;
+            pixels[i].green = rgbR.g;
+            pixels[i].blue = rgbR.b;
         }
-        
-        
-        //WS.PlanefromWorkingSpace(pixels, width*height);
         
         imgCache.sync();
         

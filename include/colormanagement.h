@@ -21,12 +21,19 @@ class WorkingSpace {
         cmsDoTransform(toWorkspace, &rgb, &rgb, 1);
         return rgb;
     }
-    inline rgb_color fromWorkingSpace(rgb_color &in) {
+    /*inline rgb_color fromWorkingSpace(rgb_color &in) {
         rgb_color ret;
+        cmsDoTransform(fromWorkspace, &in, &ret, 1);
+        return ret;
+    }*/
+    inline rgb_colorUInt16 fromWorkingSpace(rgb_color &in) {
+        rgb_colorUInt16 ret;
         cmsDoTransform(fromWorkspace, &in, &ret, 1);
         return ret;
     }
 
+    //The plane versions are kinda odd looking and not as accurate.
+    //+ they don't scale with open MP
     inline void PlanetoWorkingSpace(Magick::PixelPacket *pixels, const size_t count) {
         cmsDoTransform(toWorkspacePlane, pixels, pixels, count);
     }
