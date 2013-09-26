@@ -54,14 +54,15 @@ WorkingSpace::WorkingSpace(Magick::Blob &inputProfile) {
         cout << "Failed to create fromWorkspace" << endl;
     }  
     
-    toWorkspacePlane = cmsCreateTransform(imgProfile, format, workingSpace, format, INTENT_PERCEPTUAL, 0);
+    /*toWorkspacePlane = cmsCreateTransform(imgProfile, format, workingSpace, format, INTENT_PERCEPTUAL, cmsFLAGS_NOOPTIMIZE);
     if(toWorkspacePlane == NULL) {
         cout << "Failed to create toWorkspace" << endl;
     }  
-    fromWorkspacePlane = cmsCreateTransform(workingSpace, format, imgProfile, format, INTENT_PERCEPTUAL, 0);
+    fromWorkspacePlane = cmsCreateTransform(workingSpace, format, imgProfile, format, INTENT_PERCEPTUAL, cmsFLAGS_NOOPTIMIZE);
     if(fromWorkspacePlane == NULL) {
         cout << "Failed to create fromWorkspace" << endl;
-    }  
+    } 
+    */ 
 
     //Close Profiles        
     cmsCloseProfile(imgProfile);
