@@ -148,8 +148,6 @@ int main (int argc, char **argv) {
     const bool optHighlights = parHighlights;
     const float optL = parL;
 
-    
-    
     const float optH  = parHue/360.f;
     float optContrast = parCont/100.f;
     float optMid    = parMid/100.f;
@@ -202,7 +200,7 @@ int main (int argc, char **argv) {
         Blob ICCBlob = inImg.iccColorProfile();         //read color profile
         if(verbose) cout<<"Read ICC Profile, size: " << ICCBlob.length() << endl;
         
-        WorkingSpace WS(ICCBlob);  //Create Working space        
+        const WorkingSpace WS(ICCBlob);  //Create Working space        
         
         Pixels imgCache(inImg);    //allocate pixel cache
         PixelPacket * pixels;   //pointer to pixelpacket array

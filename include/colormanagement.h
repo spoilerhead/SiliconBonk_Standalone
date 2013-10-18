@@ -12,7 +12,7 @@ class WorkingSpace {
     WorkingSpace(Magick::Blob &inputProfile);
     ~WorkingSpace();
     
-    inline rgb_color toWorkingSpace(const rgb_colorUInt16 &in) {
+    inline rgb_color toWorkingSpace(const rgb_colorUInt16 &in) const {
         rgb_color rgb;
         rgb.r = ITOF(in.r);
         rgb.g = ITOF(in.g);
@@ -26,7 +26,7 @@ class WorkingSpace {
         cmsDoTransform(fromWorkspace, &in, &ret, 1);
         return ret;
     }*/
-    inline rgb_colorUInt16 fromWorkingSpace(rgb_color &in) {
+    inline rgb_colorUInt16 fromWorkingSpace(rgb_color &in) const {
         rgb_colorUInt16 ret;
         cmsDoTransform(fromWorkspace, &in, &ret, 1);
         return ret;
@@ -34,11 +34,11 @@ class WorkingSpace {
 
     //The plane versions are kinda odd looking and not as accurate.
     //+ they don't scale with open MP
-    inline void PlanetoWorkingSpace(Magick::PixelPacket *pixels, const size_t count) {
+    inline void PlanetoWorkingSpace(Magick::PixelPacket *pixels, const size_t count) const {
         cmsDoTransform(toWorkspacePlane, pixels, pixels, count);
     }
     
-    inline void PlanefromWorkingSpace(Magick::PixelPacket *pixels, const size_t count) {
+    inline void PlanefromWorkingSpace(Magick::PixelPacket *pixels, const size_t count) const {
         cmsDoTransform(fromWorkspacePlane, pixels, pixels, count);
     }
     
