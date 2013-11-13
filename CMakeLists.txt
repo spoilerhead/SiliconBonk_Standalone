@@ -55,6 +55,8 @@ endif()
 
 find_package(Boost 1.46.0 COMPONENTS program_options REQUIRED)
 find_package(ImageMagick COMPONENTS Magick++ REQUIRED)
+add_definitions(-DMAGICKCORE_QUANTUM_DEPTH=16)
+add_definitions( -DMAGICKCORE_HDRI_ENABLE=0)
 
 ##INCLUDE(FindLCMS2) 
 find_package(LCMS2 REQUIRED)
