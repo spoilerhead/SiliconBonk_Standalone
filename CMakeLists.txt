@@ -89,7 +89,10 @@ SET(CPACK_GENERATOR DEB;RPM)
 
 #Debian packaging stuff
 SET(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), libgcc1 (>= 1:3.4.2-12),libstdc++6, libboost-program-options1.49.0|libboost-program-options1.46.1, libmagick++4 | libmagick++5, liblcms2-2")
-SET(CPACK_DEBIAN_PACKAGE_VERSION ${CPACK_PACKAGE_VERSION}+sph1)
+
+#this is broken on recent cpack versions
+#SET(CPACK_DEBIAN_PACKAGE_VERSION ${CPACK_PACKAGE_VERSION}+sph1)
+
 SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Dieter Steiner <spoilerhead@gmail.com>")
 SET(CPACK_PACKAGE_CONTACT "Dieter Steiner <spoilerhead@gmail.com>")
 
